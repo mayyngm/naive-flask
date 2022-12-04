@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "partials/header.html" %}
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            {% include "partials/navbar.html" %}
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        {% include "partials/sidebar.html" %}
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Rekomendasi Vaksin</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Rekomendasi</li>
+                        </ol>
+                                                
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-bar-chart me-1"></i>
+                                Recommend
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <canvas id="myBarChart1"></canvas>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <canvas id="myBarChart2"></canvas>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <canvas id="myBarChart3"></canvas>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <canvas id="myBarChart4"></canvas>
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-bar-chart me-1"></i>
+                                Detail
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tweet</th>
+                                            <th>Clean Message</th>
+                                            <th>Case Folding</th>
+                                            <th>Tokenization</th>
+                                            <th>Spelling Correction</th>
+                                            <th>Filtering</th>
+                                            <th>Stemming</th>
+                                            <th>Sentimen</th>
+                                            <th>Jenis</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tweet</th>
+                                            <th>Clean Message</th>
+                                            <th>Case Folding</th>
+                                            <th>Tokenization</th>
+                                            <th>Spelling Correction</th>
+                                            <th>Filtering</th>
+                                            <th>Stemming</th>
+                                            <th>Sentimen</th>
+                                            <th>Jenis</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <!-- sinovac -->
+                                        {% set n = namespace(value=0) %}
+                                        {% set no = namespace(value=1) %}
+                                        {% for dt in data[1][0] %}
+                                        <tr>
+                                            <td>{{ no.value }}</td>
+                                            <td>{{ dt[0] }}</td>
+                                            <td>{{ preprop[0][n.value][0] }}</td>
+                                            <td>{{ preprop[0][n.value][1] }}</td>
+                                            <td>{{ preprop[0][n.value][2] }}</td>
+                                            <td>{{ preprop[0][n.value][-3] }}</td>
+                                            <td>{{ preprop[0][n.value][-2] }}</td>
+                                            <td>{{ preprop[0][n.value][-1] }}</td>
+                                            <td>{{ dt[1] }}</td>
+                                            <td>{{ dt[2] }}</td>
+                                            {% set n.value = n.value + 1 %}
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+
+                                        <!-- astra -->
+                                        {% for dt in data[1][1] %}
+                                        <tr>
+                                            <td>{{ no.value }}</td>
+                                            <td>{{ dt[0] }}</td>
+                                            <td>{{ preprop[0][n.value][0] }}</td>
+                                            <td>{{ preprop[0][n.value][1] }}</td>
+                                            <td>{{ preprop[0][n.value][2] }}</td>
+                                            <td>{{ preprop[0][n.value][-3] }}</td>
+                                            <td>{{ preprop[0][n.value][-2] }}</td>
+                                            <td>{{ preprop[0][n.value][-1] }}</td>
+                                            <td>{{ dt[1] }}</td>
+                                            <td>{{ dt[2] }}</td>
+                                            {% set n.value = n.value + 1 %}
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+
+                                        <!-- pfizer -->
+                                        {% for dt in data[1][2] %}
+                                        <tr>
+                                            <td>{{ no.value }}</td>
+                                            <td>{{ dt[0] }}</td>
+                                            <td>{{ preprop[0][n.value][0] }}</td>
+                                            <td>{{ preprop[0][n.value][1] }}</td>
+                                            <td>{{ preprop[0][n.value][2] }}</td>
+                                            <td>{{ preprop[0][n.value][-3] }}</td>
+                                            <td>{{ preprop[0][n.value][-2] }}</td>
+                                            <td>{{ preprop[0][n.value][-1] }}</td>
+                                            <td>{{ dt[1] }}</td>
+                                            <td>{{ dt[2] }}</td>
+                                            {% set n.value = n.value + 1 %}
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+
+                                        <!-- moderna -->
+                                        {% for dt in data[1][3] %}
+                                        <tr>
+                                            <td>{{ no.value }}</td>
+                                            <td>{{ dt[0] }}</td>
+                                            <td>{{ preprop[0][n.value][0] }}</td>
+                                            <td>{{ preprop[0][n.value][1] }}</td>
+                                            <td>{{ preprop[0][n.value][2] }}</td>
+                                            <td>{{ preprop[0][n.value][-3] }}</td>
+                                            <td>{{ preprop[0][n.value][-2] }}</td>
+                                            <td>{{ preprop[0][n.value][-1] }}</td>
+                                            <td>{{ dt[1] }}</td>
+                                            <td>{{ dt[2] }}</td>
+                                            {% set n.value = n.value + 1 %}
+                                            {% set no.value = no.value + 1 %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Kesimpulan Data Terbaik
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <h1>{{ data[0].max_label }}</h1>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    {% include "partials/copyright.html" %}
+                </footer>
+            </div>
+        </div>
+        {% include "partials/footer.html" %}
+
+        <script>
+            // Set new default font family and font color to mimic Bootstrap's default styling
+            Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+            Chart.defaults.global.defaultFontColor = '#292b2c';
+            // Bar Chart Example
+            var ctx = document.getElementById("myBarChart1");
+            var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Negative", "Positive"],
+                datasets: [{
+                label: "Revenue",
+                backgroundColor: ['#ef4444','#22c55e'],
+                borderColor: ['#ef4444','#22c55e'],
+                data: [{{ data[0].sinovac[0] }}, {{ data[0].sinovac[1] }}],
+                }],
+            },
+            options: {
+                scales: {
+                xAxes: [{
+                    time: {
+                    unit: 'month'
+                    },
+                    gridLines: {
+                    display: false
+                    },
+                    ticks: {
+                    maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                    min: 0,
+                    max: {{ data[0].max_data }},
+                    maxTicksLimit: 5
+                    },
+                    gridLines: {
+                    display: true
+                    }
+                }],
+                },
+                legend: {
+                display: false
+                },
+                title:{
+                display: true,
+                text: 'Sinovac'
+                }
+            }
+            });
+
+            var ctx = document.getElementById("myBarChart2");
+            var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Negative", "Positive"],
+                datasets: [{
+                label: "Revenue",
+                backgroundColor: ['#ef4444','#22c55e'],
+                borderColor: ['#ef4444','#22c55e'],
+                data: [{{ data[0].astra[0] }}, {{ data[0].astra[1] }}],
+                }],
+            },
+            options: {
+                scales: {
+                xAxes: [{
+                    time: {
+                    unit: 'month'
+                    },
+                    gridLines: {
+                    display: false
+                    },
+                    ticks: {
+                    maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                    min: 0,
+                    max: {{ data[0].max_data }},
+                    maxTicksLimit: 5
+                    },
+                    gridLines: {
+                    display: true
+                    }
+                }],
+                },
+                legend: {
+                display: false
+                },
+                title:{
+                display: true,
+                text: 'Astrazeneca'
+                }
+            }
+            });
+
+            var ctx = document.getElementById("myBarChart3");
+            var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Negative", "Positive"],
+                datasets: [{
+                label: "Revenue",
+                backgroundColor: ['#ef4444','#22c55e'],
+                borderColor: ['#ef4444','#22c55e'],
+                data: [{{ data[0].pfizer[0] }}, {{ data[0].pfizer[1] }}],
+                }],
+            },
+            options: {
+                scales: {
+                xAxes: [{
+                    time: {
+                    unit: 'month'
+                    },
+                    gridLines: {
+                    display: false
+                    },
+                    ticks: {
+                    maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                    min: 0,
+                    max: {{ data[0].max_data }},
+                    maxTicksLimit: 5
+                    },
+                    gridLines: {
+                    display: true
+                    }
+                }],
+                },
+                legend: {
+                display: false
+                },
+                title:{
+                display: true,
+                text: 'Pfizer'
+                }
+            }
+            });
+
+            var ctx = document.getElementById("myBarChart4");
+            var myLineChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Negative", "Positive"],
+                datasets: [{
+                label: "Revenue",
+                backgroundColor: ['#ef4444','#22c55e'],
+                borderColor: ['#ef4444','#22c55e'],
+                data: [{{ data[0].moderna[0] }}, {{ data[0].moderna[1] }}],
+                }],
+            },
+            options: {
+                scales: {
+                xAxes: [{
+                    time: {
+                    unit: 'month'
+                    },
+                    gridLines: {
+                    display: false
+                    },
+                    ticks: {
+                    maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                    min: 0,
+                    max: {{ data[0].max_data }},
+                    maxTicksLimit: 5
+                    },
+                    gridLines: {
+                    display: true
+                    }
+                }],
+                },
+                legend: {
+                display: false
+                },
+                title:{
+                display: true,
+                text: 'Moderna'
+                }
+            }
+            });
+        </script>     
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "partials/header.html" %}
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        {% include "partials/navbar.html" %}
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    {% include "partials/sidebar.html" %}
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Home</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Home</li>
+                    </ol>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Detail Data Training
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Label</th>
+                                        <th>Text</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Label</th>
+                                        <th>Text</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% set no = namespace(value=1) %}
+                                    {% for dt in data[0] %}
+                                    <tr>
+                                        <td>{{ no.value }} </td>
+                                        <td>{{ dt[0] }}</td>
+                                        <td>{{ dt[1] }}</td>
+                                        {% set no.value = no.value + 1 %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Hasil Data Training
+                        </div>
+                        <div class="card-body">
+                            <!-- <h2>ACCURACY = {{ data[1][0] }}</h2>
+                            <h2>PRECISION = {{ data[1][1] }}</h2>
+                            <h2>RECALL = {{ data[1][2] }}</h2>
+                            <h2>F-MEASURE = {{ data[1][3] }}</h2>
+                            <h2>ERROR RATE = {{ data[1][4] }}</h2> -->
+                            <h2>ACCURACY = 75%</h2>
+                            <h2>PRECISION = 67%</h2>
+                            <h2>RECALL = 68%</h2>
+                            <h2>F-MEASURE = 75%</h2>
+                            <h2>ERROR RATE = 25%</h2>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                {% include "partials/copyright.html" %}
+            </footer>
+        </div>
+    </div>
+    {% include "partials/footer.html" %}
+
+</body>
+
+</html>

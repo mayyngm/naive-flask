@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "partials/header.html" %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        {% include "partials/navbar.html" %}
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    {% include "partials/sidebar.html" %}
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Datates</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Datates</li>
+                    </ol>
+
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Input
+                        </div>
+                        <div class="card-body">
+                            <form action="/datates" method="post" class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="keyword" placeholder="example:astrazeneca sinovac/efek vaksin" name="keyword">
+                                    <input type="checkbox" id="astrazeneca" name="astrazeneca" value="astrazeneca">
+                                    <label for="astra">astrazeneca</label><br>
+                                    <input type="checkbox" id="sinovac" name="sinovac" value="sinovac">
+                                    <label for="sinovac">sinovac</label><br>
+                                    <input type="checkbox" id="moderna" name="moderna" value="moderna">
+                                    <label for="moderna">moderna</label><br>
+                                    <input type="checkbox" id="pfizer" name="pfizer" value="pfizer">
+                                    <label for="pfizer">pfizer</label><br>
+                                <script>
+                                let kword = '';
+
+                                const astra = document.getElementById('astrazeneca')
+                                astra.addEventListener('change', (event) => {
+                                if (event.currentTarget.checked) {
+                                    kword+=' astrazeneca'
+                                } else {
+                                    kword = kword.replace('astrazeneca', '');
+                                }
+                                kword = kword.trim();
+                                document.getElementById("keyword").value = kword;
+                                });
+
+                                const sinovac = document.getElementById('sinovac')
+                                sinovac.addEventListener('change', (event) => {
+                                if (event.currentTarget.checked) {
+                                    kword+=' sinovac'
+                                } else {
+                                    kword = kword.replace('sinovac', '');
+                                }
+                                kword = kword.trim();
+                                document.getElementById("keyword").value = kword;
+                                });
+
+                                const moderna = document.getElementById('moderna')
+                                moderna.addEventListener('change', (event) => {
+                                if (event.currentTarget.checked) {
+                                    kword+=' moderna'
+                                } else {
+                                    kword = kword.replace('moderna', '');
+                                }
+                                kword = kword.trim();
+                                document.getElementById("keyword").value = kword;
+                                });
+
+                                const pfizer = document.getElementById('pfizer')
+                                pfizer.addEventListener('change', (event) => {
+                                if (event.currentTarget.checked) {
+                                    kword+=' pfizer'
+                                } else {
+                                    kword = kword.replace('pfizer', '');
+                                }
+                                kword = kword.trim();
+                                document.getElementById("keyword").value = kword;
+                                });
+                                </script>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-primary" name="query"
+                                        value="query">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Data Tes
+                        </div>
+                        <div class="card-body">
+                            {% if data is defined %}
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tanggal</th>
+                                        <th>Tweet</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tanggal</th>
+                                        <th>Tweet</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    {% set no = namespace(value=1) %}
+                                    {% for tweet in data %}
+                                    <tr>
+                                        <td>{{ no.value }}</td>
+                                        <td>{{ tweet[0] }}</td>
+                                        <td>{{ tweet[1] }}</td>
+                                        <!-- <td>{{ date }}</td> -->
+                                        {% set no.value = no.value + 1 %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <br>
+                            <form action="/datates" method="post" class="form-inline">
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-success" name="proses"
+                                        value="proses">Proses</button>
+                                </div>
+                            </form>
+
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                {% include "partials/copyright.html" %}
+            </footer>
+        </div>
+    </div>
+    {% include "partials/footer.html" %}
+
+</body>
+
+</html>
